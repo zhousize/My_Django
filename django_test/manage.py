@@ -19,3 +19,8 @@ def main():
 
 if __name__ == '__main__':
     main()
+"""
+python3 manage.py runserver 启动服务
+python3 manage.py startapp 创建应用
+python3 manage.py migrate 数据库迁移
+"""

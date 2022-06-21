@@ -9,11 +9,16 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+"""
+Django项目的配置文件, 此配置文件中的一些全局变量将为Django框架的运行传递一些参数
+setting.py 配置文件,启动服务时自动调用，
+此配置文件中也可以定义一些自定义的变量用于作用全局作用域的数据传递
+"""
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+"""用于绑定当前项目的绝对路径(动态计算出来的), 所有文件都可以依懒此路径"""
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,8 +29,22 @@ SECRET_KEY = '@5&uzpiuno8bxw62!sqfgtpv4sbua&cyj&5+atsn04_tpi#!bc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+"""
+    用于配置Django项目的启动模式, 取值:
+    True 表示开发环境中使用 调试模式(用于开发中)
+    False 表示当前项目运行在生产环境中(不启用调试)
+"""
 
 ALLOWED_HOSTS = []
+"""
+    设置允许访问到本项目的host请求头的值,取值:
+    [] 空列表,表示只有host请求头为127.0.0.1, localhost能访问本项目 - DEBUG = True时生效
+    ['*']，表示任何请求头的host都能访问到当前项目
+    ['192.168.1.3', '127.0.0.1'] 表示只有当前两个host头的值能访问当前项目
+    注意:
+    如果要在局域网其它主机也能访问此主机,启动方式应使用如下模式:
+    python3 manage.py runserver 0.0.0.0:5000 # 指定网络设备如果内网环境下其他主机想正常访问该站点，需加`ALLOWED_HOSTS = ['内网ip']
+"""
 
 
 # Application definition
@@ -38,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+"""指定当前项目中安装的应用列表"""
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,8 +68,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+"""用于注册中间件"""
 
 ROOT_URLCONF = 'django_test.urls'
+"""
+        用于配置根级 url 配置 'mysite1.urls'
+        如:
+        ROOT_URLCONF = 'mysite1.urls'
+"""
 
 TEMPLATES = [
     {
@@ -66,6 +92,7 @@ TEMPLATES = [
         },
     },
 ]
+"""用于指定模板的配置信息"""
 
 WSGI_APPLICATION = 'django_test.wsgi.application'
 
@@ -103,9 +130,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
+"""
+    用于指定语言配置
+    取值:
+    英文 : "en-us"
+    中文 : "zh-Hans"
+"""
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
+"""
+    用于指定当前服务器端时区
+    取值:
+    世界标准时间: "UTC"
+    中国时区 : "Asia/Shanghai"
+"""
 
 USE_I18N = True
 
