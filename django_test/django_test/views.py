@@ -16,4 +16,8 @@ def print_web1(request):
 def print_web2(request):
 #例如增加一个http://127.0.0.1:8000/page/2/ 的返回对象
     return HttpResponse('这是编号为2的网页')
+
+def page_num(request,num):
+
+    return HttpResponse(f'这是编号为{num}的网页')
  

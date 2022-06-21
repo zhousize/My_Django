@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('page/1/',views.print_web1),    #增加一个http://127.0.0.1:8000/page/1/ 的对象地址
     path('page/2/',views.print_web2),    #增加一个http://127.0.0.1:8000/page/2/ 的对象地址
+    path('page/<int:num>',views.page_num)
 ]
 '''
     path(route, views, name=None)
