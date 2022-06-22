@@ -15,14 +15,18 @@ Including another URLconf
     项目的主路由配置文件，所有的动态路径必须先走该文件进行匹配
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
 from django_test import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('page/1/',views.print_web1),    #增加一个http://127.0.0.1:8000/page/1/ 的对象地址
     path('page/2/',views.print_web2),    #增加一个http://127.0.0.1:8000/page/2/ 的对象地址
-    path('page/<int:num>',views.page_num)
+    path('str/<str:_str>', views.print_str),
+    path('int/<int:_int>', views.print_int),
+    path('slug/<slug:_slug>', views.print_slug),
+    path('path/<path:_path>', views.print_path),
+    re_path(r'^(?P<x>\d{1,2})/(?P<y>\w{3})/(?P<z>\d{1,2})',views.print_algo)
 ]
 '''
     path(route, views, name=None)
