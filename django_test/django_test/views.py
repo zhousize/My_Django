@@ -41,6 +41,34 @@ def print_slug(request,_slug):
 
 def print_path(request,_path):
     # 增加一个全能的url地址
+    if request.method == 'GET':  # HTTP请求方法
+        name = request.GET.get('name', 'zhangsan')
+        age = request.GET.get('age', '18')
+        name_list = request.GET.getlist('name')
+    if request.method == 'POST':
+        name = request.POST.get('name', 'zhangsan')
+        age = request.POST.get('age', '18')
+        name_list = request.GET.getlist('name')
+    url = request.path_info  # URL字符串
+    cookies = request.COOKIES  # 包含所有的cookie，键和值都为字符串
+    session = request.session  # 似于字典的对象，表示当前的会话
+    body = request.body  # 请求体的内容(POST或PUT)
+    scheme = request.scheme  # 请求协议('http'/'https')
+    path = request.get_full_path()  # 请求的完整路径
+    host_url = request.get_host()  # 请求的主机
+    mag_head = request.META  # 请求中的元数据(消息头)
+    client_url = request.META['REMOTE_ADDR']  # 客户端IP地址
+    print(f'这是：{request.method}方法')
+    print(f'姓名：{name},年纪:{age},所有人:{name_list}')
+    print(f'url字符串:{url}')
+    print(f'cookies:{cookies}')
+    print(f'session:{session}')
+    print(f'body:{body}')
+    print(f'请求协议：{scheme}')
+    print(f'完整的路径是：{path}')
+    print(f'主机：{host_url}')
+    print(f'消息头:{mag_head}')
+    print(f'客户端地址:{client_url}')
     return HttpResponse(f'这是一个ASCII以及字符为{_path}')
 
 
