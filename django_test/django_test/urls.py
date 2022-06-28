@@ -14,9 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
     项目的主路由配置文件，所有的动态路径必须先走该文件进行匹配
 """
+from . import views
 from django.contrib import admin
 from django.urls import path,re_path
-from django_test import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +26,10 @@ urlpatterns = [
     path('int/<int:_int>', views.print_int),
     path('slug/<slug:_slug>', views.print_slug),
     path('path/<path:_path>', views.print_path),
-    re_path(r'^(?P<x>\d{1,2})/(?P<y>\w{3})/(?P<z>\d{1,2})',views.print_algo)
+    path('test_poste', views.test_post),
+    path('test',views.test_html),
+    path('clac',views.my_clac),
+    re_path(r'^(?P<x>\d{1,2})/(?P<y>\w{3})/(?P<z>\d{1,2})',views.print_algo),
 ]
 '''
     path(route, views, name=None)
@@ -35,3 +38,4 @@ urlpatterns = [
     views: 指定路径所对应的视图处理函数的名称
     name: 为地址起别名，在模板中地址反向解析时使用
 '''
+

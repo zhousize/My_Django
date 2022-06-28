@@ -8,6 +8,9 @@ Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查�
 '''
 
 from django.http import HttpResponse
+from django.shortcuts import render
+from django.template import loader
+
 
 
 def print_web1(request):
@@ -76,4 +79,71 @@ def print_algo(request,x,y,z):
     # 增加一个算法的url地址
     num = int(x) + int(z)
     return HttpResponse(f'整数{x}加上整数{z}得到的结果为:{num}')
- 
+
+
+
+html = """
+<form method='post' action="/test_poste">
+    姓名:<input type="text" name="username">
+    <br/>
+    密码:<input tpye="text" name="password">
+    <p>
+    <input type="submit" value="登录">
+    </p>
+</form>
+"""
+
+def test_post(request):
+    if request.method == 'GET':
+        return HttpResponse(html)
+    # elif request.method == 'POST':
+    #     username = request.POST['username']
+    #     password = request.POST.get('password')
+    #     print(username,password)
+    #     return HttpResponse(f'{username}注册成功')
+
+
+def test_html(request):
+    '''
+    方式一:
+    d1 = {}
+    d1['name'] = 'aid2101'
+
+    return render(request,'test.html',d1)
+    '''
+    #方式二
+    name = ['zhangsan','lisi']
+    age = [1,2,3,4,5]
+    score = {
+        name[0]:80,
+        name[1]:90,
+    }
+    ceshi = "<script>alert('helloworld')</script>"
+    return render(request, 'test.html', locals())
+
+def my_clac(request):
+    #增加一个计算机的网页
+    if request.method == 'GET':
+        x = 0
+        y = 0
+        result = 0
+        return render(request,'clac.html',locals())
+    if request.method == 'POST':
+        x = request.POST.get('x')
+        y = request.POST.get('y')
+        op = request.POST.get('op')
+        try:
+            x = int(x)
+            y = int(y)
+        except:
+            return HttpResponse('输入格式要为数字')
+        if op == 'add':
+            result = x + y
+        elif op == 'sub':
+            result = x - y
+        elif op == 'mul':
+            result = x * y
+        elif op == 'div':
+            result = x / y
+
+        return render(request, 'clac.html',locals())
